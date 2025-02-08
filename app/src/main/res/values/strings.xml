@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MyApplication</string>
+    <string name="textView">Kalbinizin ritmini yakalayın</string>
+    <string name="textView2">Desing By OzdnEglaz</string>
+    <string name="textView3">PULSİFY</string>
+    <string name="btnGirisYap">Giriş Yap</string>
+    <string name="BtnKayitOl">PULSİFY</string>
+    <string name="pulse_rate_label">Pulse Rate:</string>
+    <string name="measurement_time_label">Measurement Time:</string>
+    <string name="pulse_rate_placeholder">%1$d BPM</string>
+    <string name="measurement_time_placeholder">%1$s</string>
+    <string name="sensor_description">Sensör</string>
+    <string name="sensor_instruction">Sensöre parmağınızı koyup 1 dk bekeleyerek nabız değerinizi ölçebilirsiniz. Ölçtüğünüz nabız değeri aşağıda gösterilecektir.</string>
+    <string name="textView4">Sağlığınızı kontrol altına alın, her nabız atışında yolculuğunuza rehberlik edin.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

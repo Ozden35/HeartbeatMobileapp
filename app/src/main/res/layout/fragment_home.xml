@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#E6E6FA"
+        android:padding="16dp"
+        tools:context=".Fragment.HomeFragment">
+
+        <!-- Ana sayfa hoş geldiniz -->
+
+        <!-- Sağlık Durumunuzu İzleyin -->
+
+        <!-- Uygulama Logosu -->
+
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:text="Hoş Geldiniz!"
+            android:textColor="	#D2691E"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/appLogoImageView"
+            android:layout_width="177dp"
+            android:layout_height="163dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
+            android:contentDescription="Uygulama Logosu"
+            android:src="@drawable/nursing_home" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageViewHealthTracking"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/question_mark"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:id="@+id/titleTextViewHealthTracking"
+                android:layout_width="203dp"
+                android:layout_height="60dp"
+                android:text="Uygulamayı neden kullanmalısınız?"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/descriptionTextViewHealthTracking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Projemiz, sağlık durumunuzu kolayca izlemenizi sağlayan bir mobil uygulamadır. Nabız verilerinizi ölçerek, sağlığınızı düzenli olarak takip edebilir ve gerektiğinde sağlık uzmanlarıyla paylaşabilirsiniz."
+            android:textColor="#666666"
+            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone" />
+
+        <!-- Nasıl Çalışır? -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageViewHowItWorks"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/system"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:id="@+id/titleTextViewHowItWorks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nasıl Çalışır?"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/descriptionTextViewHowItWorks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Uygulamamız, kullanıcıların nabız verilerini ölçmelerine ve kaydetmelerine olanak tanır. Bir nabız ölçümü yapmak için uygulamayı açın, cihazınızın nabız sensörü ile bileğinize veya parmağınıza yerleştirin ve ölçümü başlatın. Uygulama, nabzınızı ölçer ve sonuçları anlık olarak gösterir."
+            android:textColor="#666666"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <!-- Sağlık Takibi -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageViewHealthTracking2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/medical__1_"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:id="@+id/titleTextViewHealthTracking2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sağlık Takibi"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/descriptionTextViewHealthTracking2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Yaptığınız nabız ölçümlerini kaydederek, sağlık durumunuzun trendlerini ve değişikliklerini takip edebilirsiniz."
+            android:textColor="#666666"
+            android:layout_marginEnd="18dp"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <!-- Güvenlik ve Gizlilik -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageViewSecurityPrivacy"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/web_browser"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:id="@+id/titleTextViewSecurityPrivacy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Güvenlik ve Gizlilik"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/descriptionTextViewSecurityPrivacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Kullanıcı gizliliğine önem veriyoruz. Nabız verileriniz, yalnızca sizin erişiminize ve isteğiniz üzerine sağlık profesyonelleriyle paylaşılabilir. Verilerinizin güvenliği için endüstri standartlarına uygun güvenlik önlemleri alınmıştır."
+            android:textColor="#666666"
+            android:textSize="16sp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone" />
+
+        <!-- Sürekli Gelişim -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/imageViewContinuousImprovement"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/promotion"
+                android:layout_marginEnd="16dp" />
+
+
+            <TextView
+            android:id="@+id/titleTextViewContinuousImprovement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sürekli Gelişim"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/descriptionTextViewContinuousImprovement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Projemiz, sürekli olarak gelişmekte ve kullanıcı geri bildirimlerini dikkate alarak daha iyi bir deneyim sunmayı hedeflemektedir. Sağlık teknolojilerindeki en son gelişmeleri takip ediyor ve uygulamamızı bu doğrultuda güncelliyoruz."
+        android:textColor="#666666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="30dp"
+        android:textSize="16sp"
+        android:layout_marginStart="4dp"
+        android:visibility="gone" />
+
+    <!-- Diğer başlıklar için aynı yapıyı kullanabilirsiniz -->
+
+</LinearLayout>
+
+</ScrollView>

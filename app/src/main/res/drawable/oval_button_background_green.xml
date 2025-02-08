@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- green_button_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#4CAF50" /> <!-- Yeşil renk -->
+    <corners android:radius="8dp" /> <!-- Kenarları oval yapar -->
+</shape>
