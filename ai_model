@@ -1,0 +1,82 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import GradientBoostingClassifier
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import StackingClassifier
+from imblearn.over_sampling import SMOTE
+import joblib
+from sklearn.neighbors import KNeighborsClassifier
+from google.colab import drive
+
+# Google Drive bağlantısı
+drive.mount('/content/drive')
+
+data = pd.read_csv('/content/drive/MyDrive/HeartRateDataset.csv')
+data.head(10)
+
+# Girdi (X) ve çıktı (y) verilerini ayırma
+X = data[['Age', 'Gender', 'HeartRate']]
+y = data['Outcome']
+
+# SMOTE ile veri dengesizliğini giderme
+smote = SMOTE(random_state=42)
+X_resampled, y_resampled = smote.fit_resample(X, y)
+
+# Eğitim ve test setlerine bölme
+X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=42)
+
+# Özellikleri ölçeklendirme
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# KNN modeli oluşturma ve eğitme
+knn = KNeighborsClassifier()
+knn.fit(X_train_scaled, y_train)
+
+y_pred_knn = knn.predict(X_test_scaled)
+print("KNN Test Doğruluğu:", accuracy_score(y_test, y_pred_knn))
+
+# LDA modeli oluşturma ve eğitme
+lda = LinearDiscriminantAnalysis()
+lda.fit(X_train_scaled, y_train)
+
+y_pred_lda = lda.predict(X_test_scaled)
+print("LDA Test Doğruluğu:", accuracy_score(y_test, y_pred_lda))
+
+# Yapay Sinir Ağı (ANN) modeli oluşturma
+ann = MLPClassifier(hidden_layer_sizes=(100,), activation='relu', solver='adam', max_iter=1000, random_state=42)
+ann.fit(X_train_scaled, y_train)
+
+y_pred_ann = ann.predict(X_test_scaled)
+print("ANN Test Doğruluğu:", accuracy_score(y_test, y_pred_ann))
+
+# Stacking Classifier oluşturma
+base_classifiers = [
+    ('KNN', KNeighborsClassifier(n_neighbors=10)),
+    ('LDA', LinearDiscriminantAnalysis()),
+    ('ANN', MLPClassifier(hidden_layer_sizes=(100,), max_iter=1000, random_state=42))
+]
+stacking_model = StackingClassifier(estimators=base_classifiers, final_estimator=KNeighborsClassifier(), cv=5)
+stacking_model.fit(X_train_scaled, y_train)
+
+y_pred_stacking = stacking_model.predict(X_test_scaled)
+print("Stacking Test Doğruluğu:", accuracy_score(y_test, y_pred_stacking))
+
+# Modeli kaydetme
+joblib.dump(stacking_model, 'stacking_model.pkl')
+print("Model kaydedildi.")
+
+# Yeni veri ile tahmin yapma
+loaded_model = joblib.load('stacking_model.pkl')
+new_data = pd.DataFrame({'Age': [45], 'Gender': [1], 'HeartRate': [50]})
+scaled_new_data = scaler.transform(new_data)
+prediction = loaded_model.predict(scaled_new_data)
+print("Tahmin:", prediction)
