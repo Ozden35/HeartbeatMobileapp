@@ -1,0 +1,89 @@
+#include <NTPClient.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+#include <ArduinoJson.h>
+#include <WiFiUdp.h>
+
+// WiFi bilgileri (Gizlenmiş, kendi bilgilerinizi girin)
+const char* ssid = "Your_WiFi_Name";  // WiFi SSID
+const char* password = "Your_WiFi_Password";  // WiFi Şifresi
+
+// Sunucu bilgileri (Gizlenmiş, kendi bilgilerinizi girin)
+const char* serverAddress = "Your_Server_IP";  // Sunucu IP
+const int serverPort = Your_Server_Port;  // Sunucu Portu
+
+const long utcOffsetInSeconds = 3 * 3600;
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
+const unsigned long measurementInterval = 60000;
+unsigned long previousMillis = 0;
+
+void setup() {
+  Serial.begin(115200);    
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("WiFi'ye bağlanılıyor...");
+  }
+  Serial.println("WiFi'ye bağlanıldı");
+  timeClient.begin();
+}
+
+void loop() {
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("WiFi bağlantısı kesildi, tekrar bağlanılıyor...");
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(1000);
+      Serial.println("WiFi'ye bağlanılıyor...");
+    }
+    Serial.println("WiFi'ye bağlanıldı");
+  }
+  timeClient.update();
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= measurementInterval) {
+    previousMillis = currentMillis;
+    int pulseRate = analogRead(A0);
+    pulseRate = constrain(pulseRate, 0, 1023);
+    pulseRate = map(pulseRate, 0, 1023, 50, 120);
+    Serial.print("Pulse Rate: ");
+    Serial.println(pulseRate);
+    String timestamp = getFormattedTime();
+    sendPulseData(pulseRate, timestamp);
+  }
+}
+
+String getFormattedTime() {
+  unsigned long rawTime = timeClient.getEpochTime();
+  int hours = (rawTime % 86400L) / 3600;
+  int minutes = (rawTime % 3600) / 60;
+  int seconds = rawTime % 60;
+ 
+  char timeString[9];
+  sprintf(timeString, "%02d:%02d:%02d", hours, minutes, seconds);
+ 
+  return String(timeString);
+}
+
+void sendPulseData(int pulseRate, String timestamp) {
+  HTTPClient http;
+  WiFiClient client;
+  String postData;
+  StaticJsonDocument<200> jsonDocument;
+  jsonDocument["pulse_rate"] = pulseRate;
+  jsonDocument["timestamp"] = timestamp;
+  serializeJson(jsonDocument, postData);
+  
+  String url = String("http://") + serverAddress + ":" + String(serverPort) + "/save_pulse";
+  http.begin(client, url);
+  http.addHeader("Content-Type", "application/json");
+  int httpResponseCode = http.POST(postData);
+  
+  if (httpResponseCode > 0) {
+    Serial.println("Nabız verisi başarıyla gönderildi");
+  } else {
+    Serial.print("HTTP POST isteği başarısız, hata kodu: ");
+    Serial.println(httpResponseCode);
+  }
+  http.end();
+}
